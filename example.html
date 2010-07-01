@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html lang='en-US' xml:lang='en-US' xmlns='http://www.w3.org/1999/xhtml'>
+  <head>
+    <meta content='text/html' http-equiv='Content-Type' />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>Example</title>
+    
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="jquery.defaultize.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        $("input[title][type='text'], input[title][type='password']").defaultize();
+      });
+    </script>
+    <style type="text/css">
+      input.defaultValue { color: gray; }
+    </style>
+  </head> 
+  <body>
+    <p>
+      <a href="">Link 1</a>
+    </p>
+    <form action="" method="post">
+      <ul>
+        <li>
+          <input type="text" name="login" title="Login" />
+        </li>
+        <li>
+          <input type="password" name="password" title="Password" />
+        </li>
+      </ul>
+      <p>
+        <input type="submit" value="Log in" />
+        <input type="button" value="Register" />
+      </p>
+    </form>
+  </body>
+</html>
