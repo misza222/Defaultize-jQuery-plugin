@@ -32,7 +32,6 @@ jQuery.defaultize = {
     jQuery.defaultize.copyAttributes(password_field, text_field);
     password_field.replaceWith(text_field);
     password_field.remove(); // to make sure all event handlers are removed
-    //text_field.blur(); // previous field lost focus so we do not need to blur it
   },
 
   replaceInputTextWithInputPassword: function(text_field) {
@@ -40,25 +39,24 @@ jQuery.defaultize = {
     jQuery.defaultize.copyAttributes(text_field, password_field);
     text_field.replaceWith(password_field);
     text_field.remove(); // to make sure all event handlers are removed
-    // setting focus on newly replaced element delaying it first as on
+    // password_field.focus() does not work in IE
     // http://stackoverflow.com/questions/102055/adding-an-input-field-to-the-dom-and-focusing-it-in-ie
-    setTimeout('jQuery.defaultize.setFocus',0);
+    setTimeout(function() {jQuery.defaultize.setFocus(password_field)},0);
   },
 
-  setFocus: function() {
-    password_field.focus();
+  setFocus: function(field) {
+    field.focus();
   },
 
-  /* TODO: when tabbing through the form new element does not always get focus when it should */
   copyAttributes: function(from, to) {
     var attrs = ['name', 'style', 'class', 'title', 'value'];
     
-    for(i in attrs) {
+    for(var i in attrs) {
       if(from.attr(attrs[i]) != undefined) {
         to.attr(attrs[i], from.attr(attrs[i]));
       }
     }
     to.focus(jQuery.defaultize.clearDefaultValuesOnFocus);
     to.blur(jQuery.defaultize.applyDefaultValuesOnBlur);
-  },
-}
+  }
+};
