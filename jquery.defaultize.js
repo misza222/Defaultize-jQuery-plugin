@@ -49,7 +49,21 @@ jQuery.defaultize = {
   },
 
   copyAttributes: function(from, to) {
-    var attrs = ['name', 'style', 'class', 'title', 'value'];
+    var attrs = [
+                  'align',
+                  'alt',
+                  'class',
+                  'checked',
+                  'disabled',
+                  'maxlength',
+                  'name',
+                  'readonly',
+                  'size',
+                  'style',
+                  'title',
+                  'value',
+                  'width'
+                ];
     
     for(var i in attrs) {
       if(from.attr(attrs[i]) != undefined) {
