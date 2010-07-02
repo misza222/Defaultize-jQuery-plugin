@@ -1,0 +1,23 @@
+<project name="jQueryPluginCompression" default="compress" basedir=".">
+  <target name="compress" depends="download-yuicompressor,clean">
+    <java jar="yuicompressor-2.4.2/build/yuicompressor-2.4.2.jar" fork="true">
+      <arg line="jquery.defaultize.js -o jquery.defaultize.min.js -v" />
+    </java>
+  </target>
+  
+  <target name="download-yuicompressor">
+    <get src="http://yuilibrary.com/downloads/yuicompressor/yuicompressor-2.4.2.zip" 
+         dest="yuicompressor.zip"
+         usetimestamp="true" />
+    <unzip src="yuicompressor.zip" dest="." />
+  </target>
+  
+  <target name="clean">
+    <delete file="jquery.defaultize.min.js" />
+  </target>
+  
+  <target name="distclean" depends="clean">
+    <delete dir="yuicompressor-2.4.2" />
+    <delete file="yuicompressor.zip" />
+  </target>
+</project>
