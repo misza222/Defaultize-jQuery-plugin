@@ -7,15 +7,16 @@ To use it just include jquery and jquery.defaultize.js plugin and specify which 
 
 Text that appears on an input field will be taken from it's title attribute. That is why in the example below we select all fields that have title attribute present.
 
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
-  <script type="text/javascript" src="jquery.defaultize.js"></script>
-  <script type="text/javascript">
+  &lt;script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"&gt;&lt;/script&gt;
+  &lt;script type="text/javascript" src="jquery.defaultize.js"&gt;&lt;/script&gt;
+  &lt;script type="text/javascript"&gt;
     $(function() {
       // Defaultize all the input fields with title attribute present and with type attribute of text or password
       $("input[title][type='text'], input[title][type='password']").defaultize();
     });
-  </script>
+  &lt;/script&gt;
 
 Compressing plugin
 ==================
 If you want to generate compressed version of the plugin you can use provided ant build file to do this automatically. Just run ant in the plugin folder.
+
