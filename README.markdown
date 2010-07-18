@@ -44,13 +44,13 @@ Browser Compatibility
 =====================
 It is the same as [compatibility of jQuery](http://docs.jquery.com/Browser_Compatibility) itself.
 Before any commit I test it on:
+
   * Windows
     * IE [6|7|8]
     * Firefox [2|3]
     * Safari [3|4]
     * Google Chrome [1|3|5]
     * Opera [9|10]
-    
   * Linux
     * Google Chrome 5
     * Firefox 3
