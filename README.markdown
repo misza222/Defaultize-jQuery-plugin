@@ -20,13 +20,17 @@ By default text that appears on an input field will be taken from it's title att
       input.defaultValue { color: gray; }
     </style>
 
+Live example
+------------
+is [here](http://misza222.github.com/Defaultize-jQuery-plugin/example.html)
+
 How it works
-============
+------------
 When there is no text in the input fields it puts some default text (by default taken from title attribute of the input element) and applies css style to indicate that it is just default value (by default it is .defaultValue css class).
 For input[type=password] field plugin needs to replace it with input[type=text] to be able to show default text instead of dots (as updating input[type] attribute does not work for some browsers).
 
 Plugin options
-==============
+--------------
 It is easy to change default behaviour by setting plugin options
 
   * cssClass
@@ -37,11 +41,11 @@ It is easy to change default behaviour by setting plugin options
     * default: title
 
 Compressing plugin
-==================
+------------------
 If you want to generate compressed version of the plugin you can use provided ant build file to do this automatically. Just run ant in the plugin folder.
 
 Browser Compatibility
-=====================
+---------------------
 It is the same as [compatibility of jQuery](http://docs.jquery.com/Browser_Compatibility) itself.
 Before any commit I test it on:
 
@@ -57,7 +61,5 @@ Before any commit I test it on:
     * Epiphany (gnome web browser) 2
 
 Known issues
-============
- - Firefox 2 - When defaultizing password field on replacement of input[type=password] with input[type=text] and back FF2 resets tab index
- 
-If you found a bug other than listed above please let me know.
+------------
+Moved to [Issues](http://github.com/misza222/Defaultize-jQuery-plugin/issues)
