@@ -63,3 +63,9 @@ Before any commit I test it on:
 Known issues
 ------------
 Moved to [Issues](http://github.com/misza222/Defaultize-jQuery-plugin/issues)
+
+Future requests:
+----------------
+ - On form submition default values shoud be removed
+ - copy all event handlers for input[type=password] elements
+ - write tests for plugin
