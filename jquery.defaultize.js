@@ -136,5 +136,3 @@ Example usage:
     }
   };
 })(jQuery);
-
-
