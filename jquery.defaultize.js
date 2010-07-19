@@ -32,7 +32,13 @@ Example usage:
           (
             $(this).attr('value') == undefined ||
             $(this).attr('value') == $(this).attr($.defaultize.settings['descriptionFromAttribute'])
-          ) && $(this).attr($.defaultize.settings['descriptionFromAttribute']) != ''
+          ) && $(this).attr($.defaultize.settings['descriptionFromAttribute']) != '' &&
+          /*
+           If it does not have that class applied to it user entered some text
+           only by accident being the same as default text so we won't clear the
+           field
+          */
+          $(this).hasClass($.defaultize.settings['cssClass'])
         ) {
           $(this).attr('value', '').removeClass($.defaultize.settings['cssClass']);
           
