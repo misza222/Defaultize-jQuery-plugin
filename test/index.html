@@ -8,8 +8,6 @@
   <script>
   $(document).ready(function(){
 
-module("Settings");
-
 test("default settings", function() {
   $('input').defaultize();
   equals( "defaultValue", $.defaultize.settings['cssClass'] );
@@ -23,6 +21,10 @@ test("custom settings", function() {
   });
   equals( "anotherClass", $.defaultize.settings['cssClass'] );
   equals( "alt", $.defaultize.settings['descriptionFromAttribute'] );
+});
+
+test("copy attributes", function() {
+  
 });
 
   });

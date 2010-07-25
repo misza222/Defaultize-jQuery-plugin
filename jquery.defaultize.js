@@ -14,62 +14,62 @@ Example usage:
                                descriptionFromAttribute: "title"
                             }, options);
     this.each(function() {
-      $(this).focus(jQuery.defaultize.clearDefaultValuesOnFocus);
-      $(this).blur(jQuery.defaultize.applyDefaultValuesOnBlur);
+      $(this).focus(function (event) { $.defaultize.clearDefaults($(this)); });
+      $(this).blur(function (event) { $.defaultize.applyDefaults($(this)); });
+      
       /*
        * Fix for FF
        *
        * On reloading the page FF does not set 
        */
-      $(this).focus();
-      $(this).blur();
+      $.defaultize.applyDefaults($(this));
     });
   };
   
   $.defaultize = {
-    clearDefaultValuesOnFocus: function(event) {
+    clearDefaults: function(element) {
       if(
           (
-            $(this).attr('value') == undefined ||
-            $(this).attr('value') == $(this).attr($.defaultize.settings['descriptionFromAttribute'])
+            element.attr('value') == undefined ||
+            element.attr('value') == element.attr($.defaultize.settings['descriptionFromAttribute'])
           ) && $(this).attr($.defaultize.settings['descriptionFromAttribute']) != '' &&
           /*
            If it does not have that class applied to it user entered some text
            only by accident being the same as default text so we won't clear the
            field
           */
-          $(this).hasClass($.defaultize.settings['cssClass'])
+          element.hasClass($.defaultize.settings['cssClass'])
         ) {
-          $(this).attr('value', '').removeClass($.defaultize.settings['cssClass']);
+          element.attr('value', '').removeClass($.defaultize.settings['cssClass']);
           
-          if($(this).attr('name').match(/password/i) && $(this).attr('type').match(/text/i)) {
-            $.defaultize.replaceInputTextWithInputPassword($(this));
+          if(element.attr('name').match(/password/i) && element.attr('type').match(/text/i)) {
+            $.defaultize.replaceTextWithPasswordField(element);
           }
       }
     },
 
-    applyDefaultValuesOnBlur: function(event) {
+    applyDefaults: function(element) {
       if(
           (
-            $(this).attr('value') == undefined || $(this).attr('value') == ''
-          ) && $(this).attr($.defaultize.settings['descriptionFromAttribute']) != ''
+            element.attr('value') == undefined || element.attr('value') == ''
+          ) && element.attr($.defaultize.settings['descriptionFromAttribute']) != ''
         ) {
-          $(this).attr('value', $(this).attr($.defaultize.settings['descriptionFromAttribute'])).addClass($.defaultize.settings['cssClass']);
+          element.attr('value', element.attr($.defaultize.settings['descriptionFromAttribute'])).addClass($.defaultize.settings['cssClass']);
           
-          if($(this).attr('name').match(/password/i) && $(this).attr('type').match(/password/i)) {
-            $.defaultize.replaceInputPasswordWithInputText($(this));
+          if(element.attr('name').match(/password/i) && element.attr('type').match(/password/i)) {
+            $.defaultize.replacePasswordWithTextField(element);
           }
       }
     },
 
-    replaceInputPasswordWithInputText: function(password_field) {
+    replacePasswordWithTextField: function(password_field) {
       var text_field = $("<input type='text' />");
       $.defaultize.copyAttributes(password_field, text_field);
       password_field.replaceWith(text_field);
       password_field.remove(); // to make sure all event handlers are removed
     },
 
-    replaceInputTextWithInputPassword: function(text_field) {
+    replaceTextWithPasswordField: function(text_field) {
       var password_field = $("<input type='password' />");
       $.defaultize.copyAttributes(text_field, password_field);
       text_field.replaceWith(password_field);
@@ -78,11 +78,7 @@ Example usage:
        * password_field.focus() does not work in IE; see link below for explanation
        * http://stackoverflow.com/questions/102055/adding-an-input-field-to-the-dom-and-focusing-it-in-ie
        */
-      setTimeout(function() {$.defaultize.setFocus(password_field)},0);
-    },
-
-    setFocus: function(field) {
-      field.focus();
+      setTimeout(function() {password_field.focus()},0);
     },
 
     /*
@@ -102,8 +98,7 @@ Example usage:
                     'size',
                     'style',
                     'title',
-                    'value',
-                    'width'
+                    'value'
                   ];
       
       for(var i in attrs) {
@@ -131,8 +126,17 @@ Example usage:
         to.attr('maxlength', 524288);
       }
       
-      to.focus($.defaultize.clearDefaultValuesOnFocus);
-      to.blur($.defaultize.applyDefaultValuesOnBlur);
+      /*
+        Copy all the events as in
+        http://stackoverflow.com/questions/2337521/copy-events-from-one-elm-to-other-using-jquery
+       */
+      var events = from.data('events');
+
+      for(var type in events) {
+          for (var idx in events[type]) {
+              to[type](events[type][idx].handler);
+          }
+      }
     }
   };
 })(jQuery);
